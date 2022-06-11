@@ -14,8 +14,8 @@ return [
     */
 
     'defaults' => [
-        'guard' => 'web',
-        'passwords' => 'users',
+        'guard' => 'aluno',
+        'passwords' => 'aluno',
     ],
 
     /*
@@ -36,9 +36,13 @@ return [
     */
 
     'guards' => [
-        'web' => [
+        'aluno' => [
             'driver' => 'session',
-            'provider' => 'users',
+            'provider' => 'alunos',
+        ],
+        'professor' => [
+            'driver' => 'session',
+            'provider' => 'professores',
         ],
     ],
 
@@ -60,9 +64,13 @@ return [
     */
 
     'providers' => [
-        'users' => [
+        'alunos' => [
             'driver' => 'eloquent',
-            'model' => App\Models\User::class,
+            'model' => App\Models\Aluno::class,
+        ],
+        'professores' => [
+            'driver' => 'eloquent',
+            'model' => App\Models\Professor::class,
         ],
 
         // 'users' => [
@@ -87,8 +95,14 @@ return [
     */
 
     'passwords' => [
-        'users' => [
-            'provider' => 'users',
+        'alunos' => [
+            'provider' => 'alunos',
+            'table' => 'password_resets',
+            'expire' => 60,
+            'throttle' => 60,
+        ],
+        'professores' => [
+            'provider' => 'professores',
             'table' => 'password_resets',
             'expire' => 60,
             'throttle' => 60,
