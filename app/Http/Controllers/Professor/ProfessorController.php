@@ -1,19 +1,19 @@
 <?php
 
-namespace App\Http\Controllers\Aluno;
+namespace App\Http\Controllers\Professor;
 
 use App\Http\Controllers\Controller;
-use App\Models\Aluno;
+use App\Models\Professor;
 
-class AlunoController extends Controller
+class ProfessorController extends Controller
 {
 
-    private Aluno $modelAluno;
+    private Professor $modelProfessor;
 
-    public function __construct(Aluno $aluno)
+    public function __construct(Professor $aluno)
     {
-        $this->modelAluno = $aluno;
-        $this->middleware('authAluno');
+        $this->modelProfessor = $aluno;
+        $this->middleware('authProfessor');
     }
 
     /**
@@ -25,6 +25,6 @@ class AlunoController extends Controller
           'curso'       => auth()->user()->Curso,
           'disciplinas' => auth()->user()->pegarDados,
         ];
-        return view('alunos.index', compact('data'));
+        return view('professores.index', compact('data'));
     }
 }

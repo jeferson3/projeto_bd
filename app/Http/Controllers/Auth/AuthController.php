@@ -13,6 +13,19 @@ use Illuminate\Support\Facades\Session;
 class AuthController extends Controller
 {
 
+    public function __construct()
+    {
+        $this->middleware('guestAluno')
+        ->only('indexAluno', 'loginAluno');
+        $this->middleware('guestProfessor')
+        ->only('indexProfessor', 'loginProfessor');
+
+        $this->middleware('authAluno')
+        ->only('logoutAluno');
+        $this->middleware('authProfessor')
+        ->only('logoutProfessor');
+    }
+
     public function indexAluno()
     {
         return view('auth.login_aluno');
@@ -29,7 +42,7 @@ class AuthController extends Controller
         if (auth()->guard('aluno')->attempt($dados)){
             return redirect(route('aluno.home'));
         }
-        return redirect(route('aluno.login.index'))
+        return redirect(route('auth.aluno.login.index'))
             ->with('error', 'Crendenciais incorretas!')
             ->withInput(['email' => $dados['email']]);
     }
@@ -40,7 +53,7 @@ class AuthController extends Controller
         if (auth()->guard('professor')->attempt($dados)){
             return redirect(route('professor.home'));
         }
-        return redirect(route('professor.login.index'))
+        return redirect(route('auth.professor.login.index'))
             ->with('error', 'Crendenciais incorretas!')
             ->withInput(['email' => $dados['email']]);
     }
