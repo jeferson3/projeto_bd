@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Support\Facades\DB;
 use Laravel\Sanctum\HasApiTokens;
 
 class Aluno extends Authenticatable
@@ -44,6 +45,17 @@ class Aluno extends Authenticatable
     {
         return $this->belongsToMany(Disciplina::class, 'aluno_disciplina', 'aluno_id', 'disciplina_id')
             ->withPivot('status', 'frequencia', 'nota_bimestre1', 'nota_bimestre2');
+    }
+
+    /**
+     * @return array
+     */
+    function getPegarDadosAttribute(): array
+    {
+        $query = "select *, media_aluno_disciplina(nota_bimestre1, nota_bimestre2) media
+                    from aluno_disciplina_view
+                        where aluno_id = :aluno_id";
+        return DB::select($query, ["aluno_id" => auth()->user()->id]);
     }
 
 }
