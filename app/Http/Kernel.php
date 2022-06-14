@@ -2,6 +2,10 @@
 
 namespace App\Http;
 
+use App\Http\Middleware\AlunoAuth;
+use App\Http\Middleware\AlunoGuest;
+use App\Http\Middleware\ProfessorAuth;
+use App\Http\Middleware\ProfessorGuest;
 use Illuminate\Foundation\Http\Kernel as HttpKernel;
 
 class Kernel extends HttpKernel
@@ -63,5 +67,9 @@ class Kernel extends HttpKernel
         'signed' => \Illuminate\Routing\Middleware\ValidateSignature::class,
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
         'verified' => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
+        'authAluno' => AlunoAuth::class,
+        'guestAluno' => AlunoGuest::class,
+        'authProfessor' => ProfessorAuth::class,
+        'guestProfessor' => ProfessorGuest::class,
     ];
 }
