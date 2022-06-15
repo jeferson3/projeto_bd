@@ -19,6 +19,7 @@
                                 <thead>
                                 <tr>
                                     <th>Status</th>
+                                    <th>Disciplina</th>
                                     <th>Frequência</th>
                                     <th>Nota 1º Bimestre</th>
                                     <th>Nota 2º Bimestre</th>
@@ -56,6 +57,7 @@
                                                         @break
                                                 @endswitch
                                             </td>
+                                            <td>{{$disciplina->disciplina_nome}}</td>
                                             <td>{{$disciplina->frequencia}}%</td>
                                             <td>{{$disciplina->nota_bimestre1}}</td>
                                             <td>{{$disciplina->nota_bimestre2}}</td>
