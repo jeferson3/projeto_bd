@@ -5,10 +5,6 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\LoginAluno;
 use App\Http\Requests\LoginProfessor;
-use App\Models\Aluno;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\Session;
 
 class AuthController extends Controller
 {
@@ -16,14 +12,14 @@ class AuthController extends Controller
     public function __construct()
     {
         $this->middleware('guestAluno')
-        ->only('indexAluno', 'loginAluno');
-        $this->middleware('guestProfessor')
-        ->only('indexProfessor', 'loginProfessor');
-
+            ->only('indexAluno', 'loginAluno');
         $this->middleware('authAluno')
-        ->only('logoutAluno');
+            ->only('logoutAluno');
+
+        $this->middleware('guestProfessor')
+            ->only('indexProfessor', 'loginProfessor');
         $this->middleware('authProfessor')
-        ->only('logoutProfessor');
+            ->only('logoutProfessor');
     }
 
     public function indexAluno()
