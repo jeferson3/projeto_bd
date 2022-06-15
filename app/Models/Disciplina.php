@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Support\Facades\DB;
 
 class Disciplina extends Model
 {
@@ -31,6 +32,41 @@ class Disciplina extends Model
     public function Professores(): BelongsToMany
     {
         return $this->belongsToMany(Professor::class, 'professor_disciplina', 'disciplina_id', 'professor_id');
+    }
+
+    /**
+     * @return array
+     */
+    public function getPegarAlunosAttribute(): array
+    {
+        $query = "select *, media_aluno_disciplina(nota_bimestre1, nota_bimestre2) media
+                    from aluno_disciplina_view
+                        where disciplina_pk_id = :disciplina_id";
+        return DB::select($query, ["disciplina_id" => $this->id]);
+    }
+
+    /**
+     * @param array $dados
+     * @return array
+     */
+    public static function atualizarDadosDoAluno(array $dados): array
+    {
+        $query = "call atualizar_aluno_disciplina(
+                    :aluno_id,
+                    :disciplina_id,
+                    :status,
+                    :frequencia,
+                    :nota_bimestre1,
+                    :nota_bimestre2
+                )";
+        return DB::select($query, [
+            "aluno_id"          => $dados['aluno'],
+            "disciplina_id"     => $dados['disciplina'],
+            "status"            => $dados['status'],
+            "frequencia"        => $dados['frequencia'],
+            "nota_bimestre1"    => $dados['nota_bimestre1'],
+            "nota_bimestre2"    => $dados['nota_bimestre2']
+        ]);
     }
 
 }
