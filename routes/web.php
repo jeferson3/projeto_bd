@@ -23,6 +23,9 @@ Route::group(["prefix" => "auth", 'as' => 'auth.'], function (){
 });
 
 Route::group(["prefix" => "/"], function (){
+    Route::group(["prefix" => "/admins", 'as' => 'admin.'], function (){
+        Route::get('dashboard', [\App\Http\Controllers\Admin\AdminController::class, 'index'])->name('home');
+    });
     Route::group(["prefix" => "/alunos", 'as' => 'aluno.'], function (){
         Route::get('dashboard', [\App\Http\Controllers\Aluno\AlunoController::class, 'index'])->name('home');
     });

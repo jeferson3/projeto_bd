@@ -1,9 +1,9 @@
 @extends('layouts.auth')
 @section('content')
 <div>
-    <h5>Área do aluno</h5>
+    <h5>Administração</h5>
     @php
-        $action = route('auth.aluno.login')
+        $action = route('auth.admin.login')
     @endphp
     <x-component-login :action="$action"></x-component-login>
 </div>
