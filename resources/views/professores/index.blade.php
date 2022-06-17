@@ -9,11 +9,9 @@
                 <span>
                     {{$disciplina->disciplina_nome}}
                 </span>
-                <form action="{{route('professor.disciplina.aluno.index', $disciplina->disciplina_pk_id)}}">
-                    <button class="btn btn-primary" type="submit">
-                        <i class="fas fa-arrow-right"></i>
-                    </button>
-                </form>
+                <a href="{{route('professor.disciplina.aluno.index', $disciplina->disciplina_pk_id)}}" class="btn btn-primary" type="submit">
+                    <i class="fas fa-arrow-right"></i>
+                </a>
             </div>
             @endforeach
         </div>
