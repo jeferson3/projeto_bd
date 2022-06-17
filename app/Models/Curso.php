@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Support\Facades\DB;
 
 class Curso extends Model
 {
@@ -27,6 +28,34 @@ class Curso extends Model
     {
         return $this->belongsToMany(Disciplina::class, 'curso_disciplina', 'curso_id', 'disciplina_id')
             ->withPivot('carga_horaria');
+    }
+
+    /**
+     * @param array $dados
+     * @return array
+     */
+    public function novoCurso(array $dados)
+    {
+        return DB::select("call cadastrar_curso(
+            :nome,
+            :tipo
+        )",[
+            'nome'  => $dados['nome'],
+            'tipo'  => $dados['tipo']
+        ]);
+    }
+
+    public function atualizarCurso(Curso $curso, array $dados)
+    {
+        return DB::select("call atualizar_curso(
+            :id,
+            :nome,
+            :tipo
+        )",[
+            'id'    => $curso->id,
+            'nome'  => $dados['nome'],
+            'tipo'  => $dados['tipo']
+        ]);
     }
 
 }

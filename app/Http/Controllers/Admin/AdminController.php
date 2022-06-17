@@ -10,9 +10,9 @@ class AdminController extends Controller
 
     private Admin $modelAdmin;
 
-    public function __construct(Admin $aluno)
+    public function __construct(Admin $curso)
     {
-        $this->modelAluno = $aluno;
+        $this->modelAdmin = $curso;
         $this->middleware('authAdmin');
     }
 

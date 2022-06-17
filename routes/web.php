@@ -25,6 +25,10 @@ Route::group(["prefix" => "auth", 'as' => 'auth.'], function (){
 Route::group(["prefix" => "/"], function (){
     Route::group(["prefix" => "/admins", 'as' => 'admin.'], function (){
         Route::get('dashboard', [\App\Http\Controllers\Admin\AdminController::class, 'index'])->name('home');
+        Route::resource('/cursos', \App\Http\Controllers\Admin\CursoController::class)->names('curso');
+        Route::get('professores', [\App\Http\Controllers\Admin\AdminController::class, 'professores_index'])->name('professor.index');
+        Route::get('disciplinas', [\App\Http\Controllers\Admin\AdminController::class, 'disciplinas_index'])->name('disciplina.index');
+        Route::get('alunos', [\App\Http\Controllers\Admin\AdminController::class, 'alunos_index'])->name('aluno.index');
     });
     Route::group(["prefix" => "/alunos", 'as' => 'aluno.'], function (){
         Route::get('dashboard', [\App\Http\Controllers\Aluno\AlunoController::class, 'index'])->name('home');
