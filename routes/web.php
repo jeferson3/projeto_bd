@@ -5,6 +5,11 @@ use Illuminate\Support\Facades\Route;
 Route::redirect('', 'auth/alunos');
 
 Route::group(["prefix" => "auth", 'as' => 'auth.'], function (){
+    Route::group(["prefix" => "admins", 'as' => 'admin.'], function (){
+        Route::get('', [\App\Http\Controllers\Auth\AuthController::class, "indexAdmin"])->name('login.index');
+        Route::post('', [\App\Http\Controllers\Auth\AuthController::class, "loginAdmin"])->name('login');
+        Route::post('/sair', [\App\Http\Controllers\Auth\AuthController::class, "logoutAdmin"])->name('logout');
+    });
     Route::group(["prefix" => "alunos", 'as' => 'aluno.'], function (){
         Route::get('', [\App\Http\Controllers\Auth\AuthController::class, "indexAluno"])->name('login.index');
         Route::post('', [\App\Http\Controllers\Auth\AuthController::class, "loginAluno"])->name('login');

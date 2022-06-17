@@ -36,6 +36,10 @@ return [
     */
 
     'guards' => [
+        'admin' => [
+            'driver' => 'session',
+            'provider' => 'admins',
+        ],
         'aluno' => [
             'driver' => 'session',
             'provider' => 'alunos',
@@ -64,6 +68,10 @@ return [
     */
 
     'providers' => [
+        'admins' => [
+            'driver' => 'eloquent',
+            'model' => App\Models\Admin::class,
+        ],
         'alunos' => [
             'driver' => 'eloquent',
             'model' => App\Models\Aluno::class,
@@ -95,6 +103,12 @@ return [
     */
 
     'passwords' => [
+        'admins' => [
+            'provider' => 'admins',
+            'table' => 'password_resets',
+            'expire' => 60,
+            'throttle' => 60,
+        ],
         'alunos' => [
             'provider' => 'alunos',
             'table' => 'password_resets',
