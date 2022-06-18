@@ -2,17 +2,17 @@
 
 @section('content')
     <div class="bg-gray-100 p-5">
-        <a href="{{route('admin.home')}}">
-            <i class="fas fa-arrow-left"></i>
-            Início
-        </a>
-        <h2 class="mt-2 mb-4">Cursos</h2>
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="{{route('admin.home')}}">Início</a></li>
+                <li class="breadcrumb-item active"><a href="{{route('admin.curso.index')}}">Cursos</a></li>
+            </ol>
+        </nav>
         <div>
             <div class="accordion" id="accordionExample">
                 <div class="accordion-item">
                     <h2 class="accordion-header" id="headingOne">
                         <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                            Meus cursos
                         </button>
                     </h2>
                     <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">

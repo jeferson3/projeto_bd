@@ -2,7 +2,11 @@
 
 @section('content')
     <div class="bg-gray-{{$data['alunos']}}0 p-5">
-        <h2 class="mt-2 mb-4">Dashboard</h2>
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item active"><a href="{{route('admin.home')}}">Início</a></li>
+            </ol>
+        </nav>
         <div class="row">
             <div class="col-md-3">
                 <div class="card border-0 border-3 border-primary border-start rounded-start">
