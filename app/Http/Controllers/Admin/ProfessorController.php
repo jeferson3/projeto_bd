@@ -62,7 +62,6 @@ class ProfessorController extends Controller
                 ->with('success', 'Dados atualizados com sucesso!');
         }
         catch (\Exception $exception){
-            dd($exception->getMessage());
             return redirect(route('admin.professor.index'))
                 ->with('error', 'Aconteceu um erro inesperado!');
         }
