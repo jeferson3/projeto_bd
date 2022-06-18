@@ -17,6 +17,11 @@ class Disciplina extends Model
         'pre_requisito_id'
     ];
 
+    public function PreRequisito()
+    {
+        return $this->belongsTo(Disciplina::class, 'pre_requisito_id');
+    }
+
     public function Alunos(): BelongsToMany
     {
         return $this->belongsToMany(Aluno::class, 'aluno_disciplina', 'disciplina_id', 'aluno_id')
@@ -66,6 +71,34 @@ class Disciplina extends Model
             "frequencia"        => $dados['frequencia'],
             "nota_bimestre1"    => $dados['nota_bimestre1'],
             "nota_bimestre2"    => $dados['nota_bimestre2']
+        ]);
+    }
+
+    /**
+     * @param array $dados
+     * @return array
+     */
+    public function novaDisciplina(array $dados)
+    {
+        return DB::select("call cadastrar_disciplina(
+            :nome,
+            :pre_requisito_id
+        )",[
+            'nome'              => $dados['nome'],
+            'pre_requisito_id'  => $dados['pre_requisito_id'] ?? null
+        ]);
+    }
+
+    public function atualizarDisciplina(Disciplina $disciplina, array $dados)
+    {
+        return DB::select("call atualizar_disciplina(
+            :id,
+            :nome,
+            :pre_requisito_id
+        )",[
+            'id'                => $disciplina->id,
+            'nome'              => $dados['nome'],
+            'pre_requisito_id'  => $dados['pre_requisito_id'] ?? null
         ]);
     }
 

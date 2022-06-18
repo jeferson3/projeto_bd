@@ -4,6 +4,10 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Admin;
+use App\Models\Aluno;
+use App\Models\Curso;
+use App\Models\Disciplina;
+use App\Models\Professor;
 
 class AdminController extends Controller
 {
@@ -22,8 +26,10 @@ class AdminController extends Controller
     public function index()
     {
         $data = [
-//          'curso'       => auth()->user()->Curso,
-//          'disciplinas' => auth()->user()->pegarDados,
+          'cursos'      => Curso::all()->count(),
+          'disciplinas' => Disciplina::all()->count(),
+          'alunos'      => Aluno::all()->count(),
+          'professores' => Professor::all()->count(),
         ];
         return view('admins.index', compact('data'));
     }

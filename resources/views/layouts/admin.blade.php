@@ -29,7 +29,14 @@
             </nav>
         </header>
         <div class="container p-5">
-            @yield('content')
+            <h2 class="mb-4">Gestão escolar</h2>
+            <hr>
+            <div class="bg-gray-100 p-5">
+                <div>
+                    <x-component-menu-painel-admin />
+                </div>
+                @yield('content')
+            </div>
         </div>
     </body>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>

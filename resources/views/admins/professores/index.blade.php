@@ -1,10 +1,10 @@
-@extends('layouts.professor')
+@extends('layouts.admin')
 
 @section('content')
     <div class="bg-gray-100 p-5">
         <a href="{{route('admin.home')}}">
             <i class="fas fa-arrow-left"></i>
-            Voltar
+            Início
         </a>
         <h2 class="mt-2 mb-4">Professores</h2>
         <div>
@@ -62,15 +62,19 @@
                                                             @method('PUT')
                                                             <input type="hidden" name="id" value="{{$professor->id}}" />
                                                             <div class="row">
+                                                                <div class="alert alert-warning">
+                                                                    <span class="required"></span>
+                                                                    Campos obrigatórios!
+                                                                </div>
                                                                 <div class="col-md-12">
                                                                     <div class="form-group my-2">
-                                                                        <label class="form-label" for="nome">Nome:</label>
+                                                                        <label class="form-label required" for="nome">Nome:</label>
                                                                         <input type="text" id="nome" name="nome" class="form-control" required value="{{$professor->nome}}" />
                                                                     </div>
                                                                 </div>
                                                                 <div class="col-md-12">
                                                                     <div class="form-group my-2">
-                                                                        <label class="form-label" for="telefone">Telefone:</label>
+                                                                        <label class="form-label required" for="telefone">Telefone:</label>
                                                                         <input type="text" id="telefone" name="telefone" class="form-control" required value="{{$professor->telefone}}" />
                                                                     </div>
                                                                 </div>
@@ -105,27 +109,31 @@
                     <form id="criarProfessor" method="post" action="{{ route('admin.professor.store') }}">
                         @csrf
                         <div class="row">
+                            <div class="alert alert-warning">
+                                <span class="required"></span>
+                                Campos obrigatórios!
+                            </div>
                             <div class="col-md-12">
                                 <div class="form-group my-2">
-                                    <label class="form-label" for="nome">Nome:</label>
+                                    <label class="form-label required" for="nome">Nome:</label>
                                     <input type="text" id="nome" name="nome" class="form-control" required />
                                 </div>
                             </div>
                             <div class="col-md-12">
                                 <div class="form-group my-2">
-                                    <label class="form-label" for="email">E-mail:</label>
+                                    <label class="form-label required" for="email">E-mail:</label>
                                     <input type="email" id="email" name="email" class="form-control" required />
                                 </div>
                             </div>
                             <div class="col-md-12">
                                 <div class="form-group my-2">
-                                    <label class="form-label" for="cpf">CPF:</label>
+                                    <label class="form-label required" for="cpf">CPF:</label>
                                     <input type="text" id="cpf" name="cpf" required class="form-control" />
                                 </div>
                             </div>
                             <div class="col-md-12">
                                 <div class="form-group my-2">
-                                    <label class="form-label" for="telefone">Telefone:</label>
+                                    <label class="form-label required" for="telefone">Telefone:</label>
                                     <input type="text" id="telefone" name="telefone" class="form-control" required />
                                 </div>
                             </div>

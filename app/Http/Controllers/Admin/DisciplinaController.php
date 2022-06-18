@@ -22,9 +22,8 @@ class DisciplinaController extends Controller
     public function index()
     {
         $data = [
-            'disciplinas' => $this->modelDisciplina->with('Curso')->orderBy('id', 'desc')->get()
+            'disciplinas' => $this->modelDisciplina->with('PreRequisito')->orderBy('id', 'desc')->get()
         ];
-//        dd($data->toArray());
         return view('admins.disciplinas.index', compact('data'));
     }
 
@@ -35,7 +34,7 @@ class DisciplinaController extends Controller
     public function store(Request $request)
     {
         try {
-            $res = $this->modelDisciplina->novoDisciplina($request->all());
+            $res = $this->modelDisciplina->novaDisciplina($request->all());
             return redirect()
                 ->back()
                 ->with('success', 'Dados registrados com sucesso!');

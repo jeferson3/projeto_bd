@@ -19,3 +19,9 @@ body {
 .menu-lateral-login {
     list-style: none;
 }
+
+.card-icon {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+}
