@@ -27,8 +27,11 @@ Route::group(["prefix" => "/"], function (){
         Route::get('dashboard', [\App\Http\Controllers\Admin\AdminController::class, 'index'])->name('home');
         Route::resource('/cursos', \App\Http\Controllers\Admin\CursoController::class)->names('curso');
         Route::resource('/alunos', \App\Http\Controllers\Admin\AlunoController::class)->names('aluno');
-        Route::resource('/professors', \App\Http\Controllers\Admin\ProfessorController::class)->names('professor');
-        Route::get('disciplinas', [\App\Http\Controllers\Admin\AdminController::class, 'disciplinas_index'])->name('disciplina.index');
+        Route::resource('/professores', \App\Http\Controllers\Admin\ProfessorController::class)->names('professor')
+            ->parameters([
+                'professores' => 'professor'
+            ]);
+        Route::resource('/disciplinas', \App\Http\Controllers\Admin\DisciplinaController::class)->names('disciplina');
     });
     Route::group(["prefix" => "/alunos", 'as' => 'aluno.'], function (){
         Route::get('dashboard', [\App\Http\Controllers\Aluno\AlunoController::class, 'index'])->name('home');

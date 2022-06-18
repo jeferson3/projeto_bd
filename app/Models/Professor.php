@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
 use Laravel\Sanctum\HasApiTokens;
 
 class Professor extends Authenticatable
@@ -45,6 +46,40 @@ class Professor extends Authenticatable
                     from professor_disciplina_view
                         where professor_id = :professor_id";
         return DB::select($query, ["professor_id" => auth()->guard('professor')->user()->id]);
+    }
+
+    /**
+     * @param array $dados
+     * @return array
+     */
+    public function novoProfessor(array $dados)
+    {
+        return DB::select("call cadastrar_professor(
+            :nome,
+            :cpf,
+            :telefone,
+            :email,
+            :senha
+        )",[
+            'nome'                  => $dados['nome'],
+            'cpf'                   => $dados['cpf'],
+            'telefone'              => $dados['telefone'],
+            'email'                 => $dados['email'],
+            'senha'                 => Hash::make($dados['cpf'])
+        ]);
+    }
+
+    public function atualizarProfessor(Professor $professor, array $dados)
+    {
+        return DB::select("call atualizar_professor(
+            :id,
+            :nome,
+            :telefone
+        )",[
+            'id'                    => $professor->id,
+            'nome'                  => $dados['nome'],
+            'telefone'              => $dados['telefone'],
+        ]);
     }
 
 }
