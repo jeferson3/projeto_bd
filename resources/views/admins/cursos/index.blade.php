@@ -38,10 +38,13 @@
                                             <td>{{$curso->id}}</td>
                                             <td>{{$curso->nome}}</td>
                                             <td>{{ucfirst($curso->tipo)}}</td>
-                                            <td>
-                                                <button data-bs-toggle="modal" data-bs-target="#editarAluno@php echo $curso->id @endphp" style="background: transparent">
+                                            <td align="right">
+                                                <button title="Editar curso" data-bs-toggle="modal" data-bs-target="#editarAluno@php echo $curso->id @endphp" style="background: transparent">
                                                     <i class="fas fa-edit text-primary"></i>
                                                 </button>
+                                                <a href="{{ route('admin.curso.aluno.index', $curso->id) }}" title="Alunos do curso" style="background: transparent">
+                                                    <i class="fas fa-user-graduate text-primary"></i>
+                                                </a>
                                             </td>
                                         </tr>
                                         <!-- Modal editar curso -->

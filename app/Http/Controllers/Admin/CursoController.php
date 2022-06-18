@@ -84,4 +84,20 @@ class CursoController extends Controller
         }
     }
 
+    /**
+     * @param Request $request
+     * @param Curso $curso
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
+     */
+    public function alunosIndex(Request $request, Curso $curso)
+    {
+        $data = [
+            'alunos'    => $curso->Alunos,
+            'curso'     => $curso,
+            'cursos'    => Curso::all()
+        ];
+//        dd($curso);
+        return view('admins.cursos.alunos.index', compact('data'));
+    }
+
 }
