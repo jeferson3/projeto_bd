@@ -43,7 +43,7 @@
                                                     <i class="fas fa-edit text-primary"></i>
                                                 </button>
                                                 <a href="{{ route('admin.curso.aluno.index', $curso->id) }}" title="Alunos do curso" style="background: transparent">
-                                                    <i class="fas fa-user-graduate text-primary"></i>
+                                                    <i class="fas fa-user-graduate text-success"></i>
                                                 </a>
                                             </td>
                                         </tr>

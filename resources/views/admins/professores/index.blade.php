@@ -47,7 +47,7 @@
                                                     <i class="fas fa-edit text-primary"></i>
                                                 </button>
                                                 <a title="Disciplinas do professor" href="{{ route('admin.professor.disciplina.index', $professor->id) }}" style="background: transparent">
-                                                    <i class="fas fa-chalkboard text-primary"></i>
+                                                    <i class="fas fa-chalkboard text-success"></i>
                                                 </a>
                                             </td>
                                         </tr>

@@ -36,6 +36,13 @@ Route::group(["prefix" => "/"], function (){
         Route::get('/professores/{professor}/disciplinas', [\App\Http\Controllers\Admin\ProfessorController::class, 'disciplinasIndex'])->name('professor.disciplina.index');
         Route::post('/professores/{professor}/disciplinas', [\App\Http\Controllers\Admin\ProfessorController::class, 'disciplinasStore'])->name('professor.disciplina.store');
         Route::delete('/professores/{professor}/disciplinas', [\App\Http\Controllers\Admin\ProfessorController::class, 'disciplinasDestroy'])->name('professor.disciplina.delete');
+
+        Route::get('/disciplinas/{disciplina}/cursos', [\App\Http\Controllers\Admin\DisciplinaController::class, 'cursosIndex'])->name('disciplina.curso.index');
+        Route::get('/disciplinas/{disciplina}/professores', [\App\Http\Controllers\Admin\DisciplinaController::class, 'professoresIndex'])->name('disciplina.professor.index');
+        Route::get('/disciplinas/{disciplina}/alunos', [\App\Http\Controllers\Admin\DisciplinaController::class, 'alunosIndex'])->name('disciplina.aluno.index');
+//        Route::post('/disciplinas/{disciplina}/disciplinas', [\App\Http\Controllers\Admin\ProfessorController::class, 'disciplinasStore'])->name('professor.disciplina.store');
+//        Route::delete('/disciplinas/{disciplina}/disciplinas', [\App\Http\Controllers\Admin\ProfessorController::class, 'disciplinasDestroy'])->name('professor.disciplina.delete');
+
     });
     Route::group(["prefix" => "/alunos", 'as' => 'aluno.'], function (){
         Route::get('dashboard', [\App\Http\Controllers\Aluno\AlunoController::class, 'index'])->name('home');

@@ -38,10 +38,19 @@
                                             <td>{{$disciplina->id}}</td>
                                             <td>{{$disciplina->nome}}</td>
                                             <td>{{$disciplina->PreRequisito ? $disciplina->PreRequisito->nome : '-'}}</td>
-                                            <td>
-                                                <button data-bs-toggle="modal" data-bs-target="#editarAluno@php echo $disciplina->id @endphp" style="background: transparent">
+                                            <td align="right">
+                                                <button title="Editar disciplina" data-bs-toggle="modal" data-bs-target="#editarAluno@php echo $disciplina->id @endphp" style="background: transparent">
                                                     <i class="fas fa-edit text-primary"></i>
                                                 </button>
+                                                <a title="Cursos da disciplina" href="{{ route('admin.disciplina.curso.index', $disciplina->id) }}" style="background: transparent">
+                                                    <i class="fas fa-graduation-cap text-success"></i>
+                                                </a>
+                                                <a title="Professores da disciplina" href="{{ route('admin.disciplina.professor.index', $disciplina->id) }}" style="background: transparent">
+                                                    <i class="fas fa-chalkboard-teacher text-success"></i>
+                                                </a>
+                                                <a title="Alunos da disciplina" href="{{ route('admin.disciplina.aluno.index', $disciplina->id) }}" style="background: transparent">
+                                                    <i class="fas fa-user-graduate text-success"></i>
+                                                </a>
                                             </td>
                                         </tr>
                                         <!-- Modal editar disciplina -->
