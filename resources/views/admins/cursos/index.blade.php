@@ -45,6 +45,9 @@
                                                 <a href="{{ route('admin.curso.aluno.index', $curso->id) }}" title="Alunos do curso" style="background: transparent">
                                                     <i class="fas fa-user-graduate text-success"></i>
                                                 </a>
+                                                <a href="{{ route('admin.curso.disciplina.index', $curso->id) }}" title="Disciplinas do curso" style="background: transparent">
+                                                    <i class="fas fa-chalkboard text-success"></i>
+                                                </a>
                                             </td>
                                         </tr>
                                         <!-- Modal editar curso -->

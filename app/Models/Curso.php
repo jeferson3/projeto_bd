@@ -58,4 +58,36 @@ class Curso extends Model
         ]);
     }
 
+    /**
+     * @param array $dados
+     * @return array
+     */
+    public function novaDisciplinaCurso(array $dados)
+    {
+        return DB::select("call cadastrar_curso_disciplina(
+            :curso_id,
+            :disciplina_id,
+            :carga_horaria
+        )",[
+            'curso_id'        => $dados['curso_id'],
+            'disciplina_id'   => $dados['disciplina_id'],
+            'carga_horaria'   => $dados['carga_horaria'],
+        ]);
+    }
+
+    /**
+     * @param array $dados
+     * @return array
+     */
+    public function deletarDisciplinaCurso(array $dados)
+    {
+        return DB::select("call deletar_curso_disciplina(
+            :curso_id,
+            :disciplina_id
+        )",[
+            'curso_id'        => $dados['curso_id'],
+            'disciplina_id'   => $dados['disciplina_id'],
+        ]);
+    }
+
 }
