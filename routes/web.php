@@ -46,6 +46,10 @@ Route::group(["prefix" => "/"], function (){
         Route::get('/disciplinas/{disciplina}/professores', [\App\Http\Controllers\Admin\DisciplinaController::class, 'professoresIndex'])->name('disciplina.professor.index');
         Route::get('/disciplinas/{disciplina}/alunos', [\App\Http\Controllers\Admin\DisciplinaController::class, 'alunosIndex'])->name('disciplina.aluno.index');
 
+        Route::get('/alunos/{aluno}/disciplinas', [\App\Http\Controllers\Admin\AlunoController::class, 'disciplinasIndex'])->name('aluno.disciplina.index');
+        Route::post('/alunos/{aluno}/disciplinas', [\App\Http\Controllers\Admin\AlunoController::class, 'disciplinasStore'])->name('aluno.disciplina.store');
+        Route::put('/alunos/{aluno}/disciplinas', [\App\Http\Controllers\Admin\AlunoController::class, 'disciplinasUpdate'])->name('aluno.disciplina.update');
+
     });
     Route::group(["prefix" => "/alunos", 'as' => 'aluno.'], function (){
         Route::get('dashboard', [\App\Http\Controllers\Aluno\AlunoController::class, 'index'])->name('home');

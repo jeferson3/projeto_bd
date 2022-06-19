@@ -49,6 +49,9 @@
                                                 <button data-bs-toggle="modal" data-bs-target="#editarAluno@php echo $aluno->id @endphp" style="background: transparent">
                                                     <i class="fas fa-edit text-primary"></i>
                                                 </button>
+                                                <a title="Disciplinas do aluno" href="{{ route('admin.aluno.disciplina.index', $aluno->id) }}" style="background: transparent">
+                                                    <i class="fas fa-chalkboard text-success"></i>
+                                                </a>
                                             </td>
                                         </tr>
                                         <!-- Modal editar aluno -->

@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Admin;
 use App\Models\Aluno;
 use App\Models\Curso;
+use App\Models\Disciplina;
 use Illuminate\Http\Request;
 
 class AlunoController extends Controller
@@ -78,6 +79,59 @@ class AlunoController extends Controller
     {
         try {
             $res = $this->modelAluno->deletarAluno($aluno);
+            return redirect()
+                ->back()
+                ->with('success', 'Dados atualizados com sucesso!');
+        }
+        catch (\Exception $exception){
+            return redirect(route('admin.aluno.index'))
+                ->with('error', 'Aconteceu um erro inesperado!');
+        }
+    }
+
+    /**
+     * @param Request $request
+     * @param Aluno $aluno
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
+     */
+    public function disciplinasIndex(Request $request, Aluno $aluno)
+    {
+        $data = [
+            'aluno'                 => $aluno,
+            'disciplinas'           => Disciplina::all()->except($aluno->Disciplinas()->select('id')->get()->pluck('id')->toArray()),
+            'disciplinas_aluno'     => $aluno->Disciplinas()->selectRaw('*, media_aluno_disciplina(nota_bimestre1, nota_bimestre2) media')->get()
+        ];
+        return view('admins.alunos.disciplinas.index', compact('data'));
+    }
+
+    /**
+     * @param Request $request
+     * @param Aluno $professor
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
+     */
+    public function disciplinasStore(Request $request)
+    {
+        try {
+            $res = $this->modelAluno->novaDisciplinaAluno($request->all());
+            return redirect()
+                ->back()
+                ->with('success', 'Dados atualizados com sucesso!');
+        }
+        catch (\Exception $exception){
+            return redirect(route('admin.aluno.index'))
+                ->with('error', 'Aconteceu um erro inesperado!');
+        }
+    }
+
+    /**
+     * @param Request $request
+     * @param Aluno $professor
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
+     */
+    public function disciplinasUpdate(Request $request)
+    {
+        try {
+            $res = $this->modelAluno->atualizarDisciplinaAluno($request->all());
             return redirect()
                 ->back()
                 ->with('success', 'Dados atualizados com sucesso!');

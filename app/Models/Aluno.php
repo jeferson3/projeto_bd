@@ -103,4 +103,48 @@ class Aluno extends Authenticatable
         ]);
     }
 
+    /**
+     * @param array $dados
+     * @return array
+     */
+    public function novaDisciplinaAluno(array $dados)
+    {
+        return DB::select("call cadastrar_aluno_disciplina(
+            :aluno_id,
+            :disciplina_id,
+            :status,
+            :frequencia
+        )",[
+            'aluno_id'        => $dados['aluno_id'],
+            'disciplina_id'   => $dados['disciplina_id'],
+            'status'          => 'cursando',
+            'frequencia'      => 100,
+        ]);
+    }
+
+
+    /**
+     * @param array $dados
+     * @return array
+     */
+    public static function atualizarDisciplinaAluno(array $dados): array
+    {
+        $query = "call atualizar_aluno_disciplina(
+                    :aluno_id,
+                    :disciplina_id,
+                    :status,
+                    :frequencia,
+                    :nota_bimestre1,
+                    :nota_bimestre2
+                )";
+        return DB::select($query, [
+            "aluno_id"          => $dados['aluno_id'],
+            "disciplina_id"     => $dados['disciplina_id'],
+            "status"            => $dados['status'],
+            "frequencia"        => $dados['frequencia'],
+            "nota_bimestre1"    => $dados['nota_bimestre1'],
+            "nota_bimestre2"    => $dados['nota_bimestre2']
+        ]);
+    }
+
 }
