@@ -82,4 +82,34 @@ class Professor extends Authenticatable
         ]);
     }
 
+    /**
+     * @param array $dados
+     * @return array
+     */
+    public function novaDisciplinaProfessor(array $dados)
+    {
+        return DB::select("call cadastrar_professor_disciplina(
+            :professor_id,
+            :disciplina_id
+        )",[
+            'professor_id'    => $dados['professor_id'],
+            'disciplina_id'   => $dados['disciplina_id'],
+        ]);
+    }
+
+    /**
+     * @param array $dados
+     * @return array
+     */
+    public function deletarDisciplinaProfessor(array $dados)
+    {
+        return DB::select("call deletar_professor_disciplina(
+            :professor_id,
+            :disciplina_id
+        )",[
+            'professor_id'    => $dados['professor_id'],
+            'disciplina_id'   => $dados['disciplina_id'],
+        ]);
+    }
+
 }

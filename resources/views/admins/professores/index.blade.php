@@ -43,9 +43,12 @@
                                             <td>{{$professor->telefone}}</td>
                                             <td>{{$professor->email}}</td>
                                             <td>
-                                                <button data-bs-toggle="modal" data-bs-target="#editarProfessor@php echo $professor->id @endphp" style="background: transparent">
+                                                <button title="Editar professor" data-bs-toggle="modal" data-bs-target="#editarProfessor@php echo $professor->id @endphp" style="background: transparent">
                                                     <i class="fas fa-edit text-primary"></i>
                                                 </button>
+                                                <a title="Disciplinas do professor" href="{{ route('admin.professor.disciplina.index', $professor->id) }}" style="background: transparent">
+                                                    <i class="fas fa-chalkboard text-primary"></i>
+                                                </a>
                                             </td>
                                         </tr>
                                         <!-- Modal editar professor -->

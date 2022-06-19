@@ -96,7 +96,6 @@ class CursoController extends Controller
             'curso'     => $curso,
             'cursos'    => Curso::all()
         ];
-//        dd($curso);
         return view('admins.cursos.alunos.index', compact('data'));
     }
 

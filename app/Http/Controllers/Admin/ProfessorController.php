@@ -86,4 +86,57 @@ class ProfessorController extends Controller
         }
     }
 
+    /**
+     * @param Request $request
+     * @param Professor $professor
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
+     */
+    public function disciplinasIndex(Request $request, Professor $professor)
+    {
+        $data = [
+            'professor'             => $professor,
+            'disciplinas'           => Disciplina::all()->except($professor->Disciplinas()->select('id')->get()->pluck('id')->toArray()),
+            'disciplinas_professor' => $professor->Disciplinas
+        ];
+        return view('admins.professores.disciplinas.index', compact('data'));
+    }
+
+    /**
+     * @param Request $request
+     * @param Professor $professor
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
+     */
+    public function disciplinasStore(Request $request)
+    {
+        try {
+            $res = $this->modelProfessor->novaDisciplinaProfessor($request->all());
+            return redirect()
+                ->back()
+                ->with('success', 'Dados atualizados com sucesso!');
+        }
+        catch (\Exception $exception){
+            return redirect(route('admin.professor.index'))
+                ->with('error', 'Aconteceu um erro inesperado!');
+        }
+    }
+
+    /**
+     * @param Request $request
+     * @param Professor $professor
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
+     */
+    public function disciplinasDestroy(Request $request)
+    {
+        try {
+            $res = $this->modelProfessor->deletarDisciplinaProfessor($request->all());
+            return redirect()
+                ->back()
+                ->with('success', 'Dados atualizados com sucesso!');
+        }
+        catch (\Exception $exception){
+            return redirect(route('admin.professor.index'))
+                ->with('error', 'Aconteceu um erro inesperado!');
+        }
+    }
+
 }
