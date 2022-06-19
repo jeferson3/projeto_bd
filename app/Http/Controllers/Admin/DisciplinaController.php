@@ -107,8 +107,7 @@ class DisciplinaController extends Controller
     {
         $data = [
             'alunos'         => $disciplina->Alunos,
-            'disciplina'     => $disciplina,
-            'disciplinas'    => Disciplina::all()
+            'disciplina'     => $disciplina
         ];
         return view('admins.disciplinas.alunos.index', compact('data'));
     }
